@@ -37,7 +37,7 @@ struct HeaderView: View {
                     .foregroundColor(.black)
                     .padding(10)
                     .background {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
                             .fill(.white)
                     }
             }
