@@ -24,7 +24,7 @@ struct Home: View {
 struct HeaderView: View {
     var body: some View {
         HStack {
-            Text("My Card")
+            Text("My Cards")
                 .font(.title.bold())
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
