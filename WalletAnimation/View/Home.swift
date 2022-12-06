@@ -10,8 +10,11 @@ import SwiftUI
 struct Home: View {
 
     var body: some View {
-        VStack {
+        VStack(spacing: 15) {
             HeaderView()
+
+            CardView()
+                .padding(.top, 10)
 
         }
         .padding(15)
@@ -45,7 +48,18 @@ struct HeaderView: View {
     }
 }
 
+struct CardView: View {
+    var cardColor: Color = .white
 
+    var body: some View {
+        VStack {
+
+        }
+        .padding(15)
+        .background(cardColor)
+        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+    }
+}
 
 
 struct Home_Previews: PreviewProvider {
