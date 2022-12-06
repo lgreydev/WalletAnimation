@@ -58,6 +58,7 @@ struct CardView: View {
         .padding(15)
         .background(cardColor)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+//        .clipShape(Circle())
     }
 }
 
