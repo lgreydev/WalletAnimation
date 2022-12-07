@@ -53,7 +53,10 @@ struct CardView: View {
 
     var body: some View {
         VStack {
-
+            Image("mastercard-logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 45, height: 45)
         }
         .padding(15)
         .background(cardColor)
