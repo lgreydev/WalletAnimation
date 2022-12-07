@@ -51,12 +51,22 @@ struct HeaderView: View {
 struct CardView: View {
     var cardColor: Color = .white
 
+    @State var value: Int = 111
+
     var body: some View {
         VStack {
             Image("mastercard-logo")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 45, height: 45)
+
+            HStack(spacing: 4) {
+                Text("$")
+                    .font(.title.bold())
+                    .foregroundColor(.black)
+
+                RollingText(value: .constant(100))
+            }
         }
         .padding(15)
         .background(cardColor)
