@@ -16,7 +16,7 @@ struct Home: View {
                 .padding(.top, 10)
             
         }
-        .padding(15)
+        .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color.black)
     }
@@ -48,7 +48,9 @@ struct HeaderView: View {
 
 struct CardView: View {
     
-    var spent: String = "5531.24"
+    let spent: String = "5531.24"
+    let cardNumber: String = "4522"
+    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -75,9 +77,26 @@ struct CardView: View {
                 }
                 
             }
+            
+            Text("Balance")
+                .fontWeight(.semibold)
+            
+            HStack {
+                Text("**** **** ****")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .kerning(3)
+                
+                Text(cardNumber)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .offset(y: -6)
+            }
         }
         .foregroundColor(.black)
-        .padding(15)
+        .padding(10)
+        .padding(.horizontal, 10)
+        .frame(maxWidth: .infinity)
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
