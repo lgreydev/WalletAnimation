@@ -12,9 +12,10 @@ struct Home: View {
         VStack(spacing: 15) {
             HeaderView()
             
-            CardView(balance: "5531.24", cardNumber: "4522")
+            CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522")
                 .padding(.top, 10)
             
+            CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351")
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -48,9 +49,15 @@ struct HeaderView: View {
 
 struct CardView: View {
     
-    var balance: String = ""
-    var cardNumber: String = ""
+    var cardColor: Color
+    var balance: String
+    var cardNumber: String
     
+    init(cardColor: Color = .clear, balance: String = "0000", cardNumber: String = "00") {
+        self.cardColor = cardColor
+        self.balance = balance
+        self.cardNumber = cardNumber
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -101,7 +108,7 @@ struct CardView: View {
         .padding(10)
         .padding(.horizontal, 10)
         .frame(maxWidth: .infinity)
-        .background(.white)
+        .background(cardColor)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 }
