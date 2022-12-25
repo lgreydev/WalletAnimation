@@ -12,9 +12,10 @@ struct Home: View {
         VStack(spacing: 15) {
             HeaderView()
             
-            CardView()
+            CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522")
                 .padding(.top, 10)
             
+            CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351")
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -48,9 +49,15 @@ struct HeaderView: View {
 
 struct CardView: View {
     
-    let spent: String = "5531.24"
-    let cardNumber: String = "4522"
+    var cardColor: Color
+    var balance: String
+    var cardNumber: String
     
+    init(cardColor: Color = .clear, balance: String = "0000", cardNumber: String = "00") {
+        self.cardColor = cardColor
+        self.balance = balance
+        self.cardNumber = cardNumber
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -63,7 +70,7 @@ struct CardView: View {
                 Text("$")
                     .font(.title.bold())
 
-                let separationString: [String] = spent.components(separatedBy: ".")
+                let separationString: [String] = balance.components(separatedBy: ".")
                 if separationString.indices.contains(0) {
                     RollingText(font: .title, weight: .bold, value: .constant(NSString(string: separationString[0]).integerValue))
                 }
@@ -76,6 +83,10 @@ struct CardView: View {
                     RollingText(font: .title, weight: .bold, value: .constant(NSString(string: separationString[1]).integerValue))
                 }
                 
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay(alignment: .trailing) {
+                CVView()
             }
             
             Text("Balance")
@@ -97,10 +108,25 @@ struct CardView: View {
         .padding(10)
         .padding(.horizontal, 10)
         .frame(maxWidth: .infinity)
-        .background(.white)
+        .background(cardColor)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
     }
 }
+
+struct CVView: View {
+    var body: some View {
+        HStack(spacing: 5) {
+            ForEach(1...3, id: \.self ) { _ in
+                Circle()
+                    .frame(width: 8, height: 8)
+            }
+        }
+        .padding(.trailing, 8)
+    }
+}
+
+
+
 
 
 struct Home_Previews: PreviewProvider {
