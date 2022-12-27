@@ -72,7 +72,7 @@ struct CardView: View {
 
                 let separationString: [String] = balance.components(separatedBy: ".")
                 if separationString.indices.contains(0) {
-                    RollingText(font: .title, weight: .bold, value: .constant(NSString(string: separationString[0]).integerValue))
+                    RollingText(font: .title, weight: .bold, animationDuration: 1.5, value: .constant(NSString(string: separationString[0]).integerValue))
                 }
                 
                 Text(".")
@@ -80,7 +80,7 @@ struct CardView: View {
                     .padding(.horizontal, -4)
                 
                 if separationString.indices.contains(1) {
-                    RollingText(font: .title, weight: .bold, value: .constant(NSString(string: separationString[1]).integerValue))
+                    RollingText(font: .title, weight: .bold, animationDuration: 1.5, value: .constant(NSString(string: separationString[1]).integerValue))
                 }
                 
             }
