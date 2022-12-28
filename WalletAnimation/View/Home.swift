@@ -15,6 +15,8 @@ struct Home: View {
             CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522")
                 .padding(.top, 10)
             
+            DetailCardView()
+            
             CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351")
         }
         .padding(10)
@@ -69,7 +71,7 @@ struct CardView: View {
             HStack(spacing: 4) {
                 Text("$")
                     .font(.title.bold())
-
+                
                 let separationString: [String] = balance.components(separatedBy: ".")
                 if separationString.indices.contains(0) {
                     RollingText(font: .title, weight: .bold, animationDuration: 1.5, value: .constant(NSString(string: separationString[0]).integerValue))
@@ -125,6 +127,64 @@ struct CVView: View {
     }
 }
 
+struct DetailCardView: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(Date().formatted(date: .abbreviated, time: .omitted))
+                .fontWeight(.semibold)
+                .foregroundColor(.gray)
+            
+            Text("633.50")
+                .font(.title.bold())
+                .foregroundColor(.white)
+            
+            HStack {
+                
+                ButtonManage()
+                
+                ButtonPayNow()
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.white.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+    }
+    
+    @ViewBuilder
+    func ButtonManage() -> some View {
+        Button {
+            // Action
+        } label: {
+            Text("Manage")
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+                .padding(.vertical, 10)
+                .padding(.horizontal, 25)
+                .background {
+                    Capsule()
+                        .stroke(.white, lineWidth: 1)
+                }
+        }
+    }
+    
+    @ViewBuilder
+    func ButtonPayNow() -> some View {
+        Button {
+            // Action
+        } label: {
+            Text("Pay Now")
+                .fontWeight(.semibold)
+                .foregroundColor(.black)
+                .padding(.vertical, 10)
+                .padding(.horizontal, 25)
+                .background {
+                    Capsule()
+                        .fill(.white)
+                }
+        }
+    }
+}
 
 
 
