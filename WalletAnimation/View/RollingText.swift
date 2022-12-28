@@ -10,6 +10,7 @@ import SwiftUI
 struct RollingText: View {
     var font: Font = .largeTitle
     var weight: Font.Weight = .regular
+    var animationDuration: CGFloat = 0.15
 
     @Binding var value: Int
     @State var animationRange: [Int] = []
@@ -56,7 +57,7 @@ struct RollingText: View {
                 }
             } else {
                 for _ in 0..<(-extra) {
-                    withAnimation(.easeIn(duration: 0.1)) {
+                    let _ = withAnimation(.easeIn(duration: 0.1)) {
                         animationRange.removeLast()
                     }
                 }
@@ -75,7 +76,7 @@ struct RollingText: View {
             var fraction = Double(index) * 0.15
             fraction = (fraction > 0.5 ? 0.5 : fraction)
 
-            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 1 + fraction, blendDuration: 1 + fraction)) {
+            withAnimation(.interactiveSpring(response: animationDuration, dampingFraction: 1 + fraction, blendDuration: 1 + fraction)) {
                 animationRange[index] = (String(value) as NSString).integerValue
             }
         }
