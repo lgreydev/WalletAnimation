@@ -33,18 +33,23 @@ struct HeaderView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Button {
-                
-            } label: {
-                Image(systemName: "plus")
-                    .font(.title2.bold())
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background {
-                        RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .fill(.white)
-                    }
-            }
+            ButtonPlus()
+        }
+    }
+    
+    @ViewBuilder
+    private func ButtonPlus() -> some View {
+        Button {
+            // Action
+        } label: {
+            Image(systemName: "plus")
+                .font(.title2.bold())
+                .foregroundColor(.black)
+                .padding(10)
+                .background {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(.white)
+                }
         }
     }
 }
@@ -139,7 +144,6 @@ struct DetailCardView: View {
                 .foregroundColor(.white)
             
             HStack {
-                
                 ButtonManage()
                 
                 ButtonPayNow()
@@ -149,10 +153,13 @@ struct DetailCardView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.white.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+        .overlay(alignment: .topTrailing) {
+            ButtonDue()
+        }
     }
     
     @ViewBuilder
-    func ButtonManage() -> some View {
+    private func ButtonManage() -> some View {
         Button {
             // Action
         } label: {
@@ -169,7 +176,7 @@ struct DetailCardView: View {
     }
     
     @ViewBuilder
-    func ButtonPayNow() -> some View {
+    private func ButtonPayNow() -> some View {
         Button {
             // Action
         } label: {
@@ -184,8 +191,20 @@ struct DetailCardView: View {
                 }
         }
     }
+    
+    @ViewBuilder
+    private func ButtonDue() -> some View {
+         Button {
+             // Action
+         } label: {
+             Text("Due")
+                 .fontWeight(.semibold)
+                 .foregroundColor(.orange)
+                 .underline(true, color: .orange)
+         }
+         .padding()
+     }
 }
-
 
 
 
