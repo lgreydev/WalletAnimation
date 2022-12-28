@@ -139,7 +139,6 @@ struct DetailCardView: View {
                 .foregroundColor(.white)
             
             HStack {
-                
                 ButtonManage()
                 
                 ButtonPayNow()
@@ -149,6 +148,9 @@ struct DetailCardView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.white.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+        .overlay(alignment: .topTrailing) {
+            ButtonDue()
+        }
     }
     
     @ViewBuilder
@@ -184,8 +186,20 @@ struct DetailCardView: View {
                 }
         }
     }
+    
+    @ViewBuilder
+    func ButtonDue() -> some View {
+         Button {
+             // Action
+         } label: {
+             Text("Due")
+                 .fontWeight(.semibold)
+                 .foregroundColor(.orange)
+                 .underline(true, color: .orange)
+         }
+         .padding()
+     }
 }
-
 
 
 
