@@ -33,18 +33,23 @@ struct HeaderView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Button {
-                
-            } label: {
-                Image(systemName: "plus")
-                    .font(.title2.bold())
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background {
-                        RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .fill(.white)
-                    }
-            }
+            ButtonPlus()
+        }
+    }
+    
+    @ViewBuilder
+    private func ButtonPlus() -> some View {
+        Button {
+            // Action
+        } label: {
+            Image(systemName: "plus")
+                .font(.title2.bold())
+                .foregroundColor(.black)
+                .padding(10)
+                .background {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(.white)
+                }
         }
     }
 }
@@ -154,7 +159,7 @@ struct DetailCardView: View {
     }
     
     @ViewBuilder
-    func ButtonManage() -> some View {
+    private func ButtonManage() -> some View {
         Button {
             // Action
         } label: {
@@ -171,7 +176,7 @@ struct DetailCardView: View {
     }
     
     @ViewBuilder
-    func ButtonPayNow() -> some View {
+    private func ButtonPayNow() -> some View {
         Button {
             // Action
         } label: {
@@ -188,7 +193,7 @@ struct DetailCardView: View {
     }
     
     @ViewBuilder
-    func ButtonDue() -> some View {
+    private func ButtonDue() -> some View {
          Button {
              // Action
          } label: {
