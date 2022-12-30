@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct Home: View {
+    @State var startAnimation: Bool = false
+    @State var animateContent: Bool = false
+    //    @State var animateText: [Bool] = [false, false]
+    @State var backgroundWidth: CGFloat? = 60
+    
     var body: some View {
         VStack(spacing: 15) {
             HeaderView()
@@ -21,7 +26,32 @@ struct Home: View {
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .background(Color.black)
+        .background {
+            Color.black
+                .frame(width: backgroundWidth)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .ignoresSafeArea()
+        }
+        .overlay(alignment: .trailing) {
+            HStack( spacing: 10) {
+                Text("My Cards")
+                Image(systemName: "chevron.right")
+            }
+            .font(.system(size: 19))
+            .fontWeight(.semibold)
+            .contentShape(Rectangle())
+            .rotationEffect(.init(degrees: -90))
+            .offset(x: 22)
+            .onTapGesture {
+                
+            }
+        }
+        .background {
+            Color.white
+                .ignoresSafeArea()
+        }
+        
+        //        (Color.black).frame(width: backgroundWidth)
     }
 }
 
@@ -56,6 +86,8 @@ struct HeaderView: View {
 
 struct CardView: View {
     
+    @State var animateText: [Bool] = [false, false]
+    
     var cardColor: Color
     var balance: String
     var cardNumber: String
@@ -78,7 +110,7 @@ struct CardView: View {
                     .font(.title.bold())
                 
                 let separationString: [String] = balance.components(separatedBy: ".")
-                if separationString.indices.contains(0) {
+                if separationString.indices.contains(0), animateText[0] {
                     RollingText(font: .title, weight: .bold, animationDuration: 1.5, value: .constant(NSString(string: separationString[0]).integerValue))
                 }
                 
@@ -86,7 +118,7 @@ struct CardView: View {
                     .font(.title.bold())
                     .padding(.horizontal, -4)
                 
-                if separationString.indices.contains(1) {
+                if separationString.indices.contains(1), animateText[1] {
                     RollingText(font: .title, weight: .bold, animationDuration: 1.5, value: .constant(NSString(string: separationString[1]).integerValue))
                 }
                 
@@ -156,6 +188,7 @@ struct DetailCardView: View {
         .overlay(alignment: .topTrailing) {
             ButtonDue()
         }
+        .padding(.vertical, 15)
     }
     
     @ViewBuilder
@@ -194,16 +227,16 @@ struct DetailCardView: View {
     
     @ViewBuilder
     private func ButtonDue() -> some View {
-         Button {
-             // Action
-         } label: {
-             Text("Due")
-                 .fontWeight(.semibold)
-                 .foregroundColor(.orange)
-                 .underline(true, color: .orange)
-         }
-         .padding()
-     }
+        Button {
+            // Action
+        } label: {
+            Text("Due")
+                .fontWeight(.semibold)
+                .foregroundColor(.orange)
+                .underline(true, color: .orange)
+        }
+        .padding()
+    }
 }
 
 
