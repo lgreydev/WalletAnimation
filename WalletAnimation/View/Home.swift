@@ -10,12 +10,11 @@ import SwiftUI
 struct Home: View {
     @State var startAnimation: Bool = false
     @State var animateContent: Bool = false
-    //    @State var animateText: [Bool] = [false, false]
     @State var backgroundWidth: CGFloat? = 60
     
     var body: some View {
         VStack(spacing: 15) {
-            HeaderView()
+            HeaderView(startAnimation: $startAnimation)
             
             CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522")
                 .padding(.top, 10)
@@ -43,25 +42,39 @@ struct Home: View {
             .rotationEffect(.init(degrees: -90))
             .offset(x: 22)
             .onTapGesture {
-                
+                animatePage()
             }
         }
         .background {
             Color.white
                 .ignoresSafeArea()
         }
+    }
+    
+    private func animatePage() {
+        withAnimation(.easeOut(duration: 0.4)) {
+            backgroundWidth = 40
+        }
         
-        //        (Color.black).frame(width: backgroundWidth)
+        withAnimation(.interactiveSpring(response: 1.1, dampingFraction: 0.75, blendDuration: 0).delay(0.3)) {
+            backgroundWidth = nil
+            startAnimation = true
+        }
     }
 }
 
 struct HeaderView: View {
+    @Binding var startAnimation: Bool
+    
     var body: some View {
         HStack {
             Text("My Cards")
                 .font(.title.bold())
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .opacity(startAnimation ? 1 : 0)
+                .offset(x: startAnimation ? 0 : 100)
+                .animation(.interactiveSpring(response: 1, dampingFraction: 1, blendDuration: 1).delay(0.9), value: startAnimation)
             
             ButtonPlus()
         }
@@ -81,6 +94,8 @@ struct HeaderView: View {
                         .fill(.white)
                 }
         }
+        .scaleEffect(startAnimation ? 1 : 0.001)
+        .animation(.interactiveSpring(response: 1, dampingFraction: 0.6, blendDuration: 0.7).delay(0.7), value: startAnimation)
     }
 }
 
