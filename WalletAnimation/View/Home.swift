@@ -10,19 +10,18 @@ import SwiftUI
 struct Home: View {
     @State var startAnimation: Bool = false
     @State var animateContent: Bool = false
-    //    @State var animateText: [Bool] = [false, false]
     @State var backgroundWidth: CGFloat? = 60
     
     var body: some View {
         VStack(spacing: 15) {
-            HeaderView()
+            HeaderView(animation: $startAnimation)
             
-            CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522")
+            CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522", animation: $startAnimation)
                 .padding(.top, 10)
             
             DetailCardView()
             
-            CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351")
+            CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351", animation: $startAnimation)
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -43,25 +42,39 @@ struct Home: View {
             .rotationEffect(.init(degrees: -90))
             .offset(x: 22)
             .onTapGesture {
-                
+                animatePage()
             }
         }
         .background {
             Color.white
                 .ignoresSafeArea()
         }
+    }
+    
+    private func animatePage() {
+        withAnimation(.easeOut(duration: 0.4)) {
+            backgroundWidth = 40
+        }
         
-        //        (Color.black).frame(width: backgroundWidth)
+        withAnimation(.interactiveSpring(response: 1.1, dampingFraction: 0.75, blendDuration: 0).delay(0.3)) {
+            backgroundWidth = nil
+            startAnimation = true
+        }
     }
 }
 
 struct HeaderView: View {
+    @Binding var animation: Bool
+    
     var body: some View {
         HStack {
             Text("My Cards")
                 .font(.title.bold())
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .opacity(animation ? 1 : 0)
+                .offset(x: animation ? 0 : 100)
+                .animation(.interactiveSpring(response: 1, dampingFraction: 1, blendDuration: 1).delay(0.9), value: animation)
             
             ButtonPlus()
         }
@@ -81,21 +94,25 @@ struct HeaderView: View {
                         .fill(.white)
                 }
         }
+        .scaleEffect(animation ? 1 : 0.001)
+        .animation(.interactiveSpring(response: 1, dampingFraction: 0.6, blendDuration: 0.7).delay(0.7), value: animation)
     }
 }
 
 struct CardView: View {
     
     @State var animateText: [Bool] = [false, false]
+    @Binding var animation: Bool
     
     var cardColor: Color
     var balance: String
     var cardNumber: String
     
-    init(cardColor: Color = .clear, balance: String = "0000", cardNumber: String = "00") {
+    init(cardColor: Color = .clear, balance: String = "0000", cardNumber: String = "00", animation: Binding<Bool>) {
         self.cardColor = cardColor
         self.balance = balance
         self.cardNumber = cardNumber
+        self._animation = animation
     }
     
     var body: some View {
@@ -149,6 +166,9 @@ struct CardView: View {
         .frame(maxWidth: .infinity)
         .background(cardColor)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+        .rotation3DEffect(.init(degrees: animation ? 0 : -70), axis: (x: 1, y: 0, z: 0), anchor: .center)
+        .scaleEffect(animation ? 1 : 0.001, anchor: .bottom)
+        .animation(.interactiveSpring(response: 1, dampingFraction: 0.7, blendDuration: 1).delay(0.9), value: animation)
     }
 }
 
