@@ -19,7 +19,7 @@ struct Home: View {
             CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522", animation: $startAnimation)
                 .padding(.top, 10)
             
-            DetailCardView()
+            DetailCardView(animation: $startAnimation)
             
             CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351", animation: $startAnimation)
         }
@@ -185,6 +185,8 @@ struct CVView: View {
 }
 
 struct DetailCardView: View {
+    @Binding var animation: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(Date().formatted(date: .abbreviated, time: .omitted))
@@ -209,6 +211,10 @@ struct DetailCardView: View {
             ButtonDue()
         }
         .padding(.vertical, 15)
+        .rotation3DEffect(.init(degrees: animation ? 0 : 30), axis: (x: 1, y: 0, z: 0))
+        .offset(y: animation ? 0 : -200)
+        .opacity(animation ? 1 : 0)
+        .animation(.interactiveSpring(response: 1, dampingFraction: 0.9, blendDuration: 1).delay(1.2), value: animation)
     }
     
     @ViewBuilder
