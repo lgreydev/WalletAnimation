@@ -18,8 +18,10 @@ struct Home: View {
             
             CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522", animation: $startAnimation)
                 .padding(.top, 10)
+                .zIndex(1)
             
             DetailCardView(animation: $startAnimation)
+                .zIndex(0)
             
             CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351", animation: $startAnimation)
         }
@@ -121,6 +123,9 @@ struct CardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 45, height: 45)
+                .offset(x: animation ? 0 : 15, y: animation ? 0 : 15)
+                .opacity(animation ? 1 : 0)
+                .animation(.easeOut(duration: 1).delay(1), value: animation)
             
             HStack(spacing: 4) {
                 Text("$")
