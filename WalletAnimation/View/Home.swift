@@ -18,10 +18,12 @@ struct Home: View {
             
             CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522", animation: $startAnimation)
                 .padding(.top, 10)
+                .zIndex(1)
             
             DetailCardView(animation: $startAnimation)
+                .zIndex(0)
             
-            CardView(cardColor: .orange, balance: "1201.78", cardNumber: "3351", animation: $startAnimation)
+            CardView(cardColor: .indigo, balance: "1201.78", cardNumber: "3351", animation: $startAnimation)
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -39,11 +41,12 @@ struct Home: View {
             .font(.system(size: 19))
             .fontWeight(.semibold)
             .contentShape(Rectangle())
-            .rotationEffect(.init(degrees: -90))
-            .offset(x: 22)
             .onTapGesture {
                 animatePage()
             }
+            .rotationEffect(.init(degrees: -90))
+            .offset(x: startAnimation ? 120 : 22)
+            .opacity(startAnimation ? 0 : 1)
         }
         .background {
             Color.white
@@ -121,6 +124,9 @@ struct CardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 45, height: 45)
+                .offset(x: animation ? 0 : 15, y: animation ? 0 : 15)
+                .opacity(animation ? 1 : 0)
+                .animation(.easeOut(duration: 1).delay(1), value: animation)
             
             HStack(spacing: 4) {
                 Text("$")
@@ -143,10 +149,16 @@ struct CardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay(alignment: .trailing) {
                 CVView()
+                    .opacity(animation ? 1 : 0)
+                    .offset(x: animation ? 0 : 70)
+                    .animation(.interactiveSpring(response: 1, dampingFraction: 1, blendDuration: 1).delay(1.6), value: animation)
             }
             
             Text("Balance")
                 .fontWeight(.semibold)
+                .opacity(animation ? 1 : 0)
+                .offset(y: animation ? 0 : 70)
+                .animation(.interactiveSpring(response: 1, dampingFraction: 1, blendDuration: 1).delay(1.5), value: animation)
             
             HStack {
                 Text("**** **** ****")
@@ -159,6 +171,9 @@ struct CardView: View {
                     .fontWeight(.semibold)
                     .offset(y: -6)
             }
+            .opacity(animation ? 1 : 0)
+            .offset(y: animation ? 0 : 70)
+            .animation(.interactiveSpring(response: 1, dampingFraction: 1, blendDuration: 1).delay(1.6), value: animation)
         }
         .foregroundColor(.black)
         .padding(10)
@@ -196,12 +211,18 @@ struct DetailCardView: View {
             Text("633.50")
                 .font(.title.bold())
                 .foregroundColor(.white)
+                .offset(x: animation ? 0 : 100)
+                .opacity(animation ? 1 : 0)
+                .animation(.easeInOut(duration: 0.6).speed(0.7).delay(1.5), value: animation)
             
             HStack {
                 ButtonManage()
                 
                 ButtonPayNow()
             }
+            .offset(y: animation ? 0 : 100)
+            .animation(.easeInOut(duration: 0.8).delay(1.8), value: animation)
+            
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -209,6 +230,9 @@ struct DetailCardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
         .overlay(alignment: .topTrailing) {
             ButtonDue()
+                .offset(x: animation ? 0 : -100)
+                .opacity(animation ? 1 : 0)
+                .animation(.easeInOut(duration: 0.8).speed(0.8).delay(1.7), value: animation)
         }
         .padding(.vertical, 15)
         .rotation3DEffect(.init(degrees: animation ? 0 : 30), axis: (x: 1, y: 0, z: 0))
