@@ -142,6 +142,7 @@ struct CardView: View {
                 let separationString: [String] = balance.components(separatedBy: ".")
                 if separationString.indices.contains(0), animateText[0] {
                     RollingText(font: .title, weight: .bold, animationDuration: 1.5, value: .constant(NSString(string: separationString[0]).integerValue))
+                        .transition(.opacity)
                 }
                 
                 Text(".")
@@ -150,9 +151,12 @@ struct CardView: View {
                 
                 if separationString.indices.contains(1), animateText[1] {
                     RollingText(font: .title, weight: .bold, animationDuration: 1.5, value: .constant(NSString(string: separationString[1]).integerValue))
+                        .transition(.opacity)
                 }
                 
             }
+            .opacity(animation ? 1 : 0)
+            .animation(.easeIn(duration: 1).delay(1.2), value: animation)
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay(alignment: .trailing) {
                 CVView()
