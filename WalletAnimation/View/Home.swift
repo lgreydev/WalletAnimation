@@ -11,19 +11,20 @@ struct Home: View {
     @State var startAnimation: Bool = false
     @State var animateContent: Bool = false
     @State var backgroundWidth: CGFloat? = 60
+    @State var animateText: [Bool] = [false, false]
     
     var body: some View {
         VStack(spacing: 15) {
             HeaderView(animation: $startAnimation)
             
-            CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522", animation: $startAnimation)
+            CardView(cardColor: .white, balance: "5531.24", cardNumber: "4522", animation: $startAnimation, animateText: $animateText)
                 .padding(.top, 10)
                 .zIndex(1)
             
             DetailCardView(animation: $startAnimation)
                 .zIndex(0)
             
-            CardView(cardColor: .indigo, balance: "1201.78", cardNumber: "3351", animation: $startAnimation)
+            CardView(cardColor: .indigo, balance: "1201.78", cardNumber: "3351", animation: $startAnimation, animateText: $animateText)
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -62,6 +63,11 @@ struct Home: View {
         withAnimation(.interactiveSpring(response: 1.1, dampingFraction: 0.75, blendDuration: 0).delay(0.3)) {
             backgroundWidth = nil
             startAnimation = true
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            animateText[0] = true
+            animateText[1] = true
         }
     }
 }
@@ -104,18 +110,19 @@ struct HeaderView: View {
 
 struct CardView: View {
     
-    @State var animateText: [Bool] = [false, false]
+    @Binding var animateText: [Bool]
     @Binding var animation: Bool
     
     var cardColor: Color
     var balance: String
     var cardNumber: String
     
-    init(cardColor: Color = .clear, balance: String = "0000", cardNumber: String = "00", animation: Binding<Bool>) {
+    init(cardColor: Color = .clear, balance: String = "0000", cardNumber: String = "00", animation: Binding<Bool>, animateText: Binding<[Bool]>) {
         self.cardColor = cardColor
         self.balance = balance
         self.cardNumber = cardNumber
         self._animation = animation
+        self._animateText = animateText
     }
     
     var body: some View {
