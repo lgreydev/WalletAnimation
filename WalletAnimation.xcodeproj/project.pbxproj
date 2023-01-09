@@ -53,9 +53,9 @@
 		5ECCC45E293842AF00251EE6 = {
 			isa = PBXGroup;
 			children = (
+				5ED5C376296C06D5003075A6 /* Screenshots */,
 				5ED5C37C296C07EA003075A6 /* License.md */,
 				5ED5C37B296C0744003075A6 /* README.md */,
-				5ED5C376296C06D5003075A6 /* Screenshots */,
 				5ECCC469293842AF00251EE6 /* WalletAnimation */,
 				5ECCC468293842AF00251EE6 /* Products */,
 			);
