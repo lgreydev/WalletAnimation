@@ -17,6 +17,8 @@
 		5ED5C37129698103003075A6 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED5C37029698103003075A6 /* CardView.swift */; };
 		5ED5C37329698145003075A6 /* CVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED5C37229698145003075A6 /* CVView.swift */; };
 		5ED5C37529698161003075A6 /* DetailCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED5C37429698161003075A6 /* DetailCardView.swift */; };
+		5ED5C380296C0973003075A6 /* image_001.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ED5C37E296C0973003075A6 /* image_001.png */; };
+		5ED5C381296C0973003075A6 /* image_002.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ED5C37F296C0973003075A6 /* image_002.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		5ED5C37429698161003075A6 /* DetailCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCardView.swift; sourceTree = "<group>"; };
 		5ED5C37B296C0744003075A6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5ED5C37C296C07EA003075A6 /* License.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = License.md; sourceTree = "<group>"; };
+		5ED5C37E296C0973003075A6 /* image_001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_001.png; sourceTree = "<group>"; };
+		5ED5C37F296C0973003075A6 /* image_002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_002.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 		5ECCC45E293842AF00251EE6 = {
 			isa = PBXGroup;
 			children = (
+				5ED5C37D296C0936003075A6 /* Screenshots */,
 				5ED5C37C296C07EA003075A6 /* License.md */,
 				5ED5C37B296C0744003075A6 /* README.md */,
 				5ECCC469293842AF00251EE6 /* WalletAnimation */,
@@ -95,6 +100,15 @@
 				5ED5C37429698161003075A6 /* DetailCardView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5ED5C37D296C0936003075A6 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				5ED5C37E296C0973003075A6 /* image_001.png */,
+				5ED5C37F296C0973003075A6 /* image_002.png */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,8 +169,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED5C381296C0973003075A6 /* image_002.png in Resources */,
 				5ECCC472293842B100251EE6 /* Preview Assets.xcassets in Resources */,
 				5ECCC46F293842B100251EE6 /* Assets.xcassets in Resources */,
+				5ED5C380296C0973003075A6 /* image_001.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
